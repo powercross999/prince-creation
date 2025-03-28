@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prince Creations</title>
+  <!-- Chart.js CDN for GDP Graph -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: #333;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav {
+      background: #444;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    nav a:hover {
+      background: #555;
+    }
+    section {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    h2 {
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    /* Welcome Section */
+    .welcome {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      background: #e2e2e2;
+    }
+    .welcome-text, .welcome-img {
+      flex: 1 1 300px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .welcome-img img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    /* GDP Graph Section */
+    #gdp {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    #gdpChart {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    /* About Section */
+    #about p {
+      text-align: center;
+    }
+    /* Services Section */
+    #services .service {
+      flex: 1 1 300px;
+      padding: 1rem;
+      text-align: center;
+    }
+    /* Articles Section */
+    .article-list {
+      list-style: none;
+      padding: 0;
+    }
+    .article-list li {
+      margin: 1rem 0;
+      padding: 1rem;
+      background: #fff;
+      border-radius: 5px;
+    }
+    .article-list li a {
+      text-decoration: none;
+      color: #007BFF;
+      font-weight: bold;
+    }
+    /* Games Section */
+    #games {
+      text-align: center;
+    }
+    #game-container {
+      position: relative;
+      display: inline-block;
+    }
+    #gameCanvas {
+      background: url('https://cdn.pixabay.com/photo/2017/06/28/14/27/sky-2453905_960_720.jpg');
+      background-size: cover;
+      display: block;
+      border: 2px solid #000;
+    }
+    #score-board {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      color: #fff;
+      text-shadow: 2px 2px 5px #000;
+      background: rgba(0,0,0,0.5);
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+    /* Gallery Section */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 5px;
+    }
+    /* Contact Section */
+    form {
+      max-width: 500px;
+      margin: auto;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    form button {
+      padding: 0.75rem 1.5rem;
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    form button:hover {
+      background: #0056b3;
+    }
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+    }
+    footer a {
+      color: #fff;
+      margin: 0 0.5rem;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header and Navigation -->
+  <header>
+    <h1>Prince Creations</h1>
+  </header>
+  <nav>
+    <a href="#welcome">Welcome</a>
+    <a href="#gdp">GDP</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#articles">Articles</a>
+    <a href="#games">Games</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- Welcome Section -->
+  <section id="welcome" class="welcome">
+    <div class="welcome-text">
+      <h2>Welcome to Our Website!</h2>
+      <p>We're thrilled to have you here. Explore our site and discover all the amazing features we offer.</p>
+      <a href="#about" style="padding: 0.75rem 1.5rem; background: #007BFF; color: #fff; border-radius: 5px; text-decoration: none;">Get Started</a>
+    </div>
+    <div class="welcome-img">
+      <img src="https://th.bing.com/th/id/OIP.Ri9qha0dcPklkGVdXmkslgHaDM?rs=1&pid=ImgDetMain" alt="Welcome Image">
+    </div>
+  </section>
+
+  <!-- GDP Graph Section (Placed just under Welcome) -->
+  <section id="gdp">
+    <h2>GDP Graph of India</h2>
+    <canvas id="gdpChart" width="800" height="400"></canvas>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About Us</h2>
+    <p>Welcome to Prince Creations! We offer a variety of creative content and interactive experiences. Explore our articles, view our GDP graph, play our games, and enjoy our gallery.</p>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services">
+    <h2>Our Services</h2>
+    <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+      <div class="service">
+        <h3>Creative Design</h3>
+        <p>Modern design solutions tailored to your vision.</p>
+      </div>
+      <div class="service">
+        <h3>Web Development</h3>
+        <p>Responsive and dynamic websites that engage your audience.</p>
+      </div>
+      <div class="service">
+        <h3>Digital Marketing</h3>
+        <p>Boost your brand's visibility with targeted strategies.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Articles Section -->
+  <section id="articles">
+    <h2>Articles</h2>
+    <p>Check out these curated articles from top websites:</p>
+    <ul class="article-list">
+      <li>
+        <a href="https://techcrunch.com" target="_blank">Latest in Technology</a>
+        <p>Read about cutting-edge technology trends on TechCrunch.</p>
+      </li>
+      <li>
+        <a href="https://www.webmd.com" target="_blank">Health and Wellness</a>
+        <p>Discover expert advice and health tips on WebMD.</p>
+      </li>
+      <li>
+        <a href="https://www.forbes.com" target="_blank">Business Insights</a>
+        <p>Get the latest business news and insights from Forbes.</p>
+      </li>
+      <li>
+        <a href="https://www.billboard.com" target="_blank">Entertainment Buzz</a>
+        <p>Stay updated on music, movies, and pop culture with Billboard.</p>
+      </li>
+      <li>
+        <a href="https://www.espn.com" target="_blank">Sports Highlights</a>
+        <p>Catch up on the latest sports news and scores on ESPN.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Games Section -->
+  <section id="games">
+    <h2>Flappy Bird Game</h2>
+    <div id="game-container">
+      <canvas id="gameCanvas" width="320" height="480"></canvas>
+      <div id="score-board">Score: 0 | High Score: 0</div>
+    </div>
+    <p>Press SPACE or Click/Tap to Jump</p>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery">
+      <img src="https://via.placeholder.com/400x300?text=Gallery+Image+1" alt="Gallery Image 1">
+      <img src="https://via.placeholder.com/400x300?text=Gallery+Image+2" alt="Gallery Image 2">
+      <img src="https://via.placeholder.com/400x300?text=Gallery+Image+3" alt="Gallery Image 3">
+      <img src="https://via.placeholder.com/400x300?text=Gallery+Image+4" alt="Gallery Image 4">
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" rows="4" required></textarea>
+      
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Prince Creations. All rights reserved.</p>
+    <p>
+      <a href="#">Facebook</a> |
+      <a href="#">Twitter</a> |
+      <a href="#">Instagram</a>
+    </p>
+  </footer>
+
+  <!-- Flappy Bird Game Script (Your provided code) -->
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const scoreBoard = document.getElementById('score-board');
+
+    canvas.width = 320;
+    canvas.height = 480;
+
+    const bird = {
+      x: 50,
+      y: canvas.height / 2 - 15,
+      width: 30,
+      height: 30,
+      gravity: 0.6,
+      lift: -15,
+      velocity: 0,
+      draw() {
+        ctx.fillStyle = '#ff0';
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+      },
+      update() {
+        this.velocity += this.gravity;
+        this.y += this.velocity;
+        if (this.y + this.height > canvas.height) {
+          this.y = canvas.height - this.height;
+          this.velocity = 0;
+        }
+        if (this.y < 0) {
+          this.y = 0;
+          this.velocity = 0;
+        }
+      },
+      flap() {
+        this.velocity = this.lift;
+      }
+    };
+
+    const pipes = [];
+    const pipeWidth = 50;
+    const pipeGap = 120;
+    const pipeSpeed = 2;
+    let frame = 0;
+    let score = 0;
+    let highScore = 0;
+
+    function drawPipes() {
+      ctx.fillStyle = '#0f0';
+      pipes.forEach(pipe => {
+        ctx.fillRect(pipe.x, 0, pipeWidth, pipe.top);
+        ctx.fillRect(pipe.x, pipe.top + pipeGap, pipeWidth, canvas.height - pipe.top - pipeGap);
+      });
+    }
+
+    function updatePipes() {
+      if (frame % 90 === 0) {
+        const top = Math.random() * (canvas.height / 2);
+        pipes.push({ x: canvas.width, top });
+      }
+      pipes.forEach(pipe => {
+        pipe.x -= pipeSpeed;
+      });
+      if (pipes.length && pipes[0].x < -pipeWidth) {
+        pipes.shift();
+        score++;
+        if (score > highScore) highScore = score;
+      }
+    }
+
+    function detectCollision() {
+      for (let i = 0; i < pipes.length; i++) {
+        const pipe = pipes[i];
+        if (
+          bird.x < pipe.x + pipeWidth &&
+          bird.x + bird.width > pipe.x &&
+          (bird.y < pipe.top || bird.y + bird.height > pipe.top + pipeGap)
+        ) {
+          resetGame();
+        }
+      }
+    }
+
+    function resetGame() {
+      bird.y = canvas.height / 2 - 15;
+      bird.velocity = 0;
+      pipes.length = 0;
+      score = 0;
+    }
+
+    function updateGame() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      bird.draw();
+      bird.update();
+      drawPipes();
+      updatePipes();
+      detectCollision();
+      scoreBoard.innerText = `Score: ${score} | High Score: ${highScore}`;
+      frame++;
+      requestAnimationFrame(updateGame);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        bird.flap();
+      }
+    });
+    canvas.addEventListener('click', () => {
+      bird.flap();
+    });
+    updateGame();
+  </script>
+
+  <!-- GDP Graph Script -->
+  <script>
+    // Sample GDP data for India (in USD Billions) and corresponding years
+    const gdpData = {
+      labels: ["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"],
+      datasets: [{
+        label: "GDP (USD Billions)",
+        data: [1700, 1850, 2000, 2200, 2400, 2700, 2900, 3100, 3300, 3500, 3700],
+        borderColor: "rgba(75,192,192,1)",
+        backgroundColor: "rgba(75,192,192,0.2)",
+        fill: true,
+        tension: 0.3,
+      }]
+    };
+
+    const config = {
+      type: 'line',
+      data: gdpData,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: true },
+          title: {
+            display: true,
+            text: 'GDP Graph of India'
+          }
+        },
+        scales: {
+          x: { title: { display: true, text: 'Year' } },
+          y: { title: { display: true, text: 'GDP (USD Billions)' } }
+        }
+      }
+    };
+
+    window.addEventListener('load', () => {
+      const ctxGDP = document.getElementById('gdpChart').getContext('2d');
+      new Chart(ctxGDP, config);
+    });
+  </script>
+</body>
+</html>
